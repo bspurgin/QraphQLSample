@@ -1,0 +1,78 @@
+type Query {
+    allPeople: PeopleConnection
+    person(id: ID): Person
+}
+
+type PeopleConnection {
+    edges: [PeopleEdge]
+    people: [Person]
+    pageInfo: PageInfo
+    totalCount: Int
+}
+
+type PeopleEdge {
+    cursor: String
+    node: Person
+}
+
+type Person {
+    id: ID!
+    name: String
+    birthYear: String
+    eyeColor: String
+    gender: String
+    hairColor: String
+    height: Int
+    mass: Float
+    skinColor: String
+    homeworld: Planet
+    filmConnection: PersonFilmsConnection
+    species: Species
+    starshipConnection: PersonStarshipsConnection
+    vehicleConnection: PersonVehiclesConnection
+    created: String
+    edited: String
+}
+
+type PersonFilmsConnection {
+    edges: [PersonFilmsEdge]
+    films: [Film]
+    totalCount: Int
+}
+
+type Planet {
+    name: String
+    created: String
+}
+
+type PersonFilmsEdge {
+    cursor: String
+    node: Film
+}
+
+type PersonStarshipsConnection {
+    edges: [PersonStarshipsEdge]
+    starships: [Starship]
+    totalCount: Int
+}
+
+type PersonStarshipsEdge {
+    cursor: String
+    node: Starship
+}
+
+type PersonVehiclesConnection {
+    edges: [PersonVehiclesEdge]
+    vehicles: [Vehicle]
+    totalCount: Int
+}
+
+type PersonVehiclesEdge {
+    cursor: String
+    node: Vehicle
+}
+
+type PageInfo {
+    endCursor: String
+    hasNextPage: Boolean
+}
