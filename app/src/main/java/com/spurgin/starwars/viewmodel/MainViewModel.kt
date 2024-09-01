@@ -6,11 +6,14 @@ import androidx.lifecycle.viewModelScope
 import com.spurgin.starwars.GetPeopleQuery
 import com.spurgin.starwars.GetPersonQuery
 import com.spurgin.starwars.repository.StarWarsRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-open class MainViewModel(private val repository: StarWarsRepository) : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(private val repository: StarWarsRepository) : ViewModel() {
 
     private val _people = MutableStateFlow<List<GetPeopleQuery.Person?>>(emptyList())
     val people: StateFlow<List<GetPeopleQuery.Person?>> = _people

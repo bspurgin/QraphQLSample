@@ -6,11 +6,15 @@ import com.apollographql.apollo3.api.ApolloResponse
 import com.spurgin.starwars.GetPersonQuery
 import com.spurgin.starwars.GetPeopleQuery
 import com.spurgin.starwars.api.ApolloClientInstance
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class StarWarsRepository(private val apolloClient: ApolloClient) {
+@Singleton
+class StarWarsRepository @Inject constructor(private val apolloClient: ApolloClient) {
 
     suspend fun getPeople(): List<GetPeopleQuery.Person?> {
-        val response: ApolloResponse<GetPeopleQuery.Data> = apolloClient.query(GetPeopleQuery()).execute()
+        val response: ApolloResponse<GetPeopleQuery.Data> =
+            apolloClient.query(GetPeopleQuery()).execute()
         return response.data?.allPeople?.people.orEmpty()
     }
 
