@@ -5,6 +5,7 @@ import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.api.ApolloResponse
 import com.spurgin.starwars.GetPersonQuery
 import com.spurgin.starwars.GetPeopleQuery
+import com.spurgin.starwars.api.ApolloClientInstance
 
 class StarWarsRepository(private val apolloClient: ApolloClient) {
 
@@ -18,5 +19,11 @@ class StarWarsRepository(private val apolloClient: ApolloClient) {
         val response: ApolloResponse<GetPersonQuery.Data> = apolloClient.query(GetPersonQuery(id = id)).execute()
         Log.d("StarWarsRepository", "Fetched person: ${response.data?.person}")
         return response.data?.person
+    }
+}
+
+object StarWarsRepositoryProvider {
+    val repository: StarWarsRepository by lazy {
+        StarWarsRepository(ApolloClientInstance.client)
     }
 }
